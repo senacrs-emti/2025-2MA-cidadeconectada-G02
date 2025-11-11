@@ -1,4 +1,8 @@
-.container{
+*{
+  margin: 0;
+  padding: 0;
+}
+.container {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -7,7 +11,7 @@
  .header{
     position: relative;
     width: 100%;
-    height: 600px;
+    height: 590px;
     overflow: hidden;
   }
   
@@ -20,11 +24,13 @@
 .menu{
   position: absolute;
   top: 25px;
-  left: 0;
-  right: 0;
+  left: 18px;
+  right: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+ 
+
 }
  
 .menu .categorias{
@@ -40,6 +46,7 @@
   display: flex;
   gap: 15px;
   align-items: center;
+  
 }
 
 .menu li a {
@@ -62,7 +69,7 @@
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40%;
+  width: 45%;
 }
 
 
@@ -81,3 +88,167 @@
   font-size: 18px;
 }
 
+
+.container2 {
+  display: flex;
+  align-items: center; 
+  gap: 40px;
+  padding: 20px 35px;
+}
+
+.imagem_main1 {
+  width: 500px;  
+  height: 500px;
+  border-radius: 10px;
+  margin-left: 15px;
+}
+
+/* Container vertical para título + texto */
+.texto-container {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  max-width: 550px;
+  margin-left: 30px; 
+}
+
+.texto-container h1 {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.texto-container p {
+  font-size: 20px;
+  line-height: 1.7;
+  text-align: justify; 
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  margin-bottom: 20px;
+}
+
+/*Parte2 Main*/
+.container3 {
+  display: flex;
+  align-items: center; 
+  gap: 40px;
+  padding: 20px 35px;
+}
+
+.imagem_main2 {
+  width: 500px;  
+  height: 500px;
+  border-radius: 10px;
+  margin-left: 15px;
+}
+
+/* Container vertical para título + texto */
+.texto-container3 {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  max-width: 550px;
+  margin-left: 30px; 
+}
+
+.texto-container3 h1 {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.texto-container3 p {
+  font-size: 20px;
+  line-height: 1.7;
+  text-align: justify; 
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  margin-bottom: 20px;
+}
+
+footer{
+  display: flex;
+  justify-content:center;
+  width: 100%;
+  padding: 40px 0;
+  color: white;
+  background-color: black;
+}
+
+footer .container4{
+  width: 1124px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+footer .container4 .colunaesquerda{
+  width: 350px;
+}
+
+footer .container4 .colunaesquerda p{
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+footer .container4 .github{
+  display: flex;
+  gap: 15px;
+  margin-top: 10px; 
+}
+
+footer .container4 .github .icon{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+footer .container4 .github .dori{
+  background-image: url('https://avatars.githubusercontent.com/u/178334935?v=4');
+  background-size: cover;
+}
+footer .container4 .github .pedro{
+  background-image: url('https://avatars.githubusercontent.com/u/178341303?v=4');
+  background-size: cover;
+}
+footer .container4 .github .luciana{
+  background-image: url('https://avatars.githubusercontent.com/u/177216342?v=4');
+  background-size: cover;
+}
+footer .container4 .github .isabelle{
+  background-image: url('https://avatars.githubusercontent.com/u/178409089?s=400&u=89a6093adfd6297a7efa6ec0ca19dd61cb7dd5a4&v=4');
+  background-size: cover;
+}
+
+footer .container4 .colunas{
+  display: flex;
+  gap: 70px;  
+}
+
+
+footer .colunas .coluna{
+  display: flex;
+  flex-direction: column;
+}
+
+footer .colunas .coluna h3{
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+footer .colunas .coluna p{
+  margin-bottom: 6px;
+  font-size: 15px;
+  color: rgb(200,200,200);
+}
