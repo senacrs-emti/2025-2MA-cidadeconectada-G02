@@ -37,6 +37,7 @@
   list-style: none;
   display: flex;
   gap: 25px;
+  font-size: large;
  
 
 }
@@ -184,6 +185,7 @@ footer .container4{
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 footer .container4 .colunaesquerda{
@@ -234,6 +236,8 @@ footer .container4 .github .isabelle{
 footer .container4 .colunas{
   display: flex;
   gap: 70px;  
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
 }
 
 
@@ -247,8 +251,9 @@ footer .colunas .coluna h3{
   font-size: 18px;
 }
 
-footer .colunas .coluna p{
+footer .colunas .coluna p a{
   margin-bottom: 6px;
   font-size: 15px;
   color: rgb(200,200,200);
+  color: white;
 }
