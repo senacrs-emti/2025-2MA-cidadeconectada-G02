@@ -38,10 +38,10 @@ main{
 .bar2 h1 {
    position: absolute;
    margin-top: 0px;
-   margin-left: 135px;
+   margin-left: 160px;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
 
@@ -59,11 +59,11 @@ main{
    opacity: 0;
    transition: max-height 0.8s ease, opacity 0.6s ease;
    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-   margin-top: 10px;
+   margin-top: 16px;
  }
 
 
- input[type="checkbox"]:checked ~ .content {
+ .faq-item input[type="checkbox"]:checked ~ .content{
    max-height: 500px;
    opacity: 1;
  }
@@ -83,7 +83,7 @@ main{
    transition: transform 0.4s ease;
  }
 
- input[type="checkbox"]:checked + label .arrow {
+ .faq-item input[type="checkbox"]:checked + label .arrow {
    transform: translateY(-53%) rotate(180deg);
  }
 
@@ -99,15 +99,12 @@ main{
 
 
 
-
-
-
 .bar3{
    width: 910px;
    height: 125px;
    background-color: rgb(208, 208, 208);
    margin-left: 180px;
-   margin-top: 15px;
+   margin-top: 35px;
    border-radius: 10px;
    position: relative;
    cursor: pointer;
@@ -117,13 +114,19 @@ main{
 
 .bar3 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 105px;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
+
+
+
+
+
+
 
 
 .bar4{
@@ -131,7 +134,7 @@ main{
    height: 125px;
    background-color: rgb(208, 208, 208);
    margin-left: 180px;
-   margin-top: 40px;
+   margin-top: 35px;
    border-radius: 10px;
    position: relative;
    cursor: pointer;
@@ -141,11 +144,11 @@ main{
 
 .bar4 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 65px;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
 
@@ -155,7 +158,7 @@ main{
    height: 125px;
    background-color: rgb(208, 208, 208);
    margin-left: 180px;
-   margin-top: 40px;
+   margin-top: 35px;
    border-radius: 10px;
    position: relative;
    cursor: pointer;
@@ -165,11 +168,11 @@ main{
 
 .bar5 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 130px;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
 
@@ -189,11 +192,11 @@ main{
 
 .bar6 h1 {
    position: absolute;
-   margin-top: 45px;
+   margin-top: 0px;
    margin-left: 135px;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
 
@@ -213,11 +216,11 @@ main{
 
 .bar7 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 120px;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
 
@@ -237,11 +240,11 @@ main{
 
 .bar8 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 19.5%;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
 
@@ -261,11 +264,11 @@ main{
 
 .bar9 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 12%;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
 
@@ -285,35 +288,11 @@ main{
 
 .bar10 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 10.5%;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
-   color: #1a1a1a;
- }
-
-
-.bar11{
-   width: 910px;
-   height: 125px;
-   background-color: rgb(208, 208, 208);
-   margin-left: 180px;
-   margin-top: 40px;
-   border-radius: 10px;
-   position: relative;
-   cursor: pointer;
-   display: flex;
-   align-items: center;
-}
-
-.bar11 h1 {
-   position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
-   font-family: Arial, Helvetica, sans-serif;
-   font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
 
@@ -333,12 +312,13 @@ main{
 
 .bar12 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 0;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 22px;
    color: #1a1a1a;
+   margin-inline: 10%;
  }
 
 
@@ -357,12 +337,13 @@ main{
 
 .bar13 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 0;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
+   margin-inline: 10%;
  }
 
 
@@ -381,12 +362,13 @@ main{
 
 .bar14 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 0;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
+   margin-inline: 10.5%;
  }
 
 
@@ -405,11 +387,11 @@ main{
 
 .bar15 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 14%;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
 
@@ -429,11 +411,11 @@ main{
 
 .bar16 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 11%;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
 
@@ -453,10 +435,10 @@ main{
 
 .bar17 h1 {
    position: absolute;
-   margin-top: 45px;
-   margin-left: 135px;
+   margin-top: 0px;
+   margin-left: 17%;
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 100;
-   font-size: 28px;
+   font-size: 25px;
    color: #1a1a1a;
  }
