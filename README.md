@@ -1,4 +1,4 @@
-# 🌦️ RotaSul — Mapa Climático do Rio Grande do Sul
+# 🌦️ Tempo Gaúcho — Mapa Climático do Rio Grande do Sul
 
 ## 🗺️ Sobre o projeto
 
@@ -53,7 +53,8 @@ Esses dados ajudam a compreender o comportamento climático do estado e apoiar d
 - [INMET - Instituto Nacional de Meteorologia](https://bdmep.inmet.gov.br/)  
 - [CPTEC/INPE - Centro de Previsão de Tempo e Estudos Climáticos](https://www.cptec.inpe.br/)  
 - [CEMADEN - Centro Nacional de Monitoramento e Alertas de Desastres Naturais](https://www.cemaden.gov.br/)
-- ????
+- [API - Geolocalização Google Maps](https://mapsplatform.google.com/lp/maps-apis/)
+- [API - Open Weather](https://openweathermap.org/api)
 
 ---
 
@@ -65,6 +66,8 @@ Esses dados ajudam a compreender o comportamento climático do estado e apoiar d
 - Modo noturno e filtros por tipo de dado  
 - Painel de comparação de dados sazonais
 - Informações relacionadas a enchentes
+
+---
 
 ## 👥 Autores
 
