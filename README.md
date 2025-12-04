@@ -39,12 +39,13 @@ Esses dados ajudam a compreender o comportamento climático do estado e apoiar d
 
 | Categoria | Ferramentas |
 |------------|-------------|
-| **Linguagens** | HTML, CSS, JavaScript, PHP, SQL |
-| **Back-end (API)** | PHP, JavaScript(API) |
+| **Linguagens** | HTML, CSS, JavaScript, SQL, Pyton, NodeJS |
+| **Back-end (API)** | Pyton(API) |
 | **Banco de dados** | MySQL |
-| **Front-end** | HTML, CSS, JavaScript |
-| **Integração com dados reais** | API pública/!!! |
-| **Mapas** | [MapTiler] (https://www.maptiler.com/) |
+| **Front-end** | HTML, CSS, JavaScript, NodeJS |
+| **Integração com dados reais** | API´s públicas: OpenWheater e GoogleMaps
+Biblioteca Flesk |
+| **Mapas** | [Google Maps] (https://www.google.com/maps) |
 
 ---
 
