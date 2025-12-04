@@ -39,9 +39,8 @@ Esses dados ajudam a compreender o comportamento climático do estado e apoiar d
 
 | Categoria | Ferramentas |
 |------------|-------------|
-| **Linguagens** | HTML, CSS, JavaScript, SQL, Pyton, NodeJS |
+| **Linguagens** | HTML, CSS, JavaScript, Pyton, NodeJS |
 | **Back-end (API)** | Pyton(API) |
-| **Banco de dados** | MySQL |
 | **Front-end** | HTML, CSS, JavaScript, NodeJS |
 | **Integração com dados reais** | API´s públicas: OpenWheater e GoogleMaps
 Biblioteca Flesk |
