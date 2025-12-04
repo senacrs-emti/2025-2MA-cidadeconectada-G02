@@ -1,4 +1,4 @@
-# 🌦️ Tempo Gaúcho — Mapa Climático do Rio Grande do Sul
+# 🌦️ ClimaSul — Mapa Climático do Rio Grande do Sul
 
 ## 🗺️ Sobre o projeto
 
