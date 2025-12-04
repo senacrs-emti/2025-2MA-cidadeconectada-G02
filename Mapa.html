@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerta Climático RS | Mapa Interativo</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Definição de cores baseadas em alerta */
+            --cor-fundo: #f8f9fa;
+            --alerta-critico: #dc3545; /* Vermelho */
+            --alerta-atencao: #ffc107; /* Amarelo */
+            --alerta-aviso: #007bff; /* Azul */
+            --alerta-neutro: #28a745; /* Verde */
+        }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        #mapa-container { 
+            height: 100vh; 
+            width: 100vw; 
+            position: relative;
+        }
+        #info-painel {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            background: var(--cor-fundo);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 380px;
+            max-width: 90vw; /* Responsividade */
+            max-height: 95vh;
+            overflow-y: auto;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        #info-painel h3 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        /* Seção de Clima Atual */
+        #clima-atual-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px 0;
+        }
+        #clima-atual-display i {
+            font-size: 3.5em; /* Ícone Grande */
+            color: #343a40;
+        }
+        #temp-valor {
+            font-size: 3em;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .alerta-container {
+            border-radius: 8px;
+            margin-top: 15px;
+            padding: 10px;
+        }
+        .alerta-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        .alerta-item:last-child {
+            border-bottom: none;
+        }
+        .alerta-item i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        /* Cores Dinâmicas Baseadas no Nível */
+        .alerta-critico-bg { background-color: rgba(220, 53, 69, 0.1); border-left: 5px solid var(--alerta-critico); }
+        .alerta-atencao-bg { background-color: rgba(255, 193, 7, 0.1); border-left: 5px solid var(--alerta-atencao); }
+        .alerta-aviso-bg { background-color: rgba(0, 123, 255, 0.1); border-left: 5px solid var(--alerta-aviso); }
+        .alerta-neutro-bg { background-color: rgba(40, 167, 69, 0.1); border-left: 5px solid var(--alerta-neutro); }
+
+        .critico-text { color: var(--alerta-critico); font-weight: bold; }
+        .atencao-text { color: var(--alerta-atencao); font-weight: bold; }
+        .aviso-text { color: var(--alerta-aviso); font-weight: bold; }
+        .neutro-text { color: var(--alerta-neutro); font-weight: bold; }
+
+        /* Estilo para Previsão CPTEC */
+        #cptec-previsao {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mapa-container"></div>
+    <div id="info-painel">
+        <h3>📍 Alerta RS</h3>
+        <p>Clique em qualquer ponto do mapa para obter o clima e os alertas.</p>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <script>
+        const API_BASE_URL = 'http://127.0.0.1:5000/api/v1/alerta/coordenada';
+        const infoPainel = document.getElementById('info-painel');
+
+        // Mapeamento de ícones do OpenWeatherMap para Font Awesome (Simplificado)
+        const OWM_ICONS = {
+            '01d': 'fa-sun', '01n': 'fa-moon', // Céu limpo
+            '02d': 'fa-cloud-sun', '02n': 'fa-cloud-moon', // Poucas nuvens
+            '03d': 'fa-cloud', '03n': 'fa-cloud', // Nuvens dispersas
+            '04d': 'fa-cloud-meatball', '04n': 'fa-cloud-meatball', // Nublado
+            '09d': 'fa-cloud-showers-heavy', '09n': 'fa-cloud-showers-heavy', // Chuva fraca
+            '10d': 'fa-cloud-showers-heavy', '10n': 'fa-cloud-showers-heavy', // Chuva
+            '11d': 'fa-bolt', '11n': 'fa-bolt', // Trovoadas
+            '13d': 'fa-snowflake', '13n': 'fa-snowflake', // Neve
+            '50d': 'fa-smog', '50n': 'fa-smog', // Nevoeiro
+        };
+
+        // --- 1. Inicialização do Mapa ---
+        const mapa = L.map('mapa-container').setView([-30.0346, -51.2177], 9);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(mapa);
+        
+        setTimeout(() => mapa.invalidateSize(), 400); 
+        
+        let marcadorAtual = null;
+
+        // --- 2. Função de Busca da API ---
+
+        async function buscarAlertas(lat, lon) {
+            infoPainel.innerHTML = `<h3>📍 ${lat.toFixed(4)}, ${lon.toFixed(4)}</h3><p>Carregando dados...</p>`;
+            
+            try {
+                const response = await axios.get(`${API_BASE_URL}?lat=${lat}&lon=${lon}`);
+                atualizarPainel(response.data);
+
+            } catch (error) {
+                console.error("Erro ao chamar a API:", error);
+                const erroDetalhe = error.response ? error.response.data.erro : 'Servidor Flask indisponível.';
+                infoPainel.innerHTML = `<h3>❌ Erro de Conexão</h3><p class="critico-text">${erroDetalhe}</p>`;
+            }
+        }
+
+        // --- 3. Função para Atualizar o Painel de Informações ---
+        
+        function atualizarPainel(dados) {
+            const cidade = dados.local.cidade || 'Local Desconhecido';
+            const climaAtual = dados.clima_atual;
+            const alertas = dados.alertas_ativos;
+            const cptec = dados.previsao_cptec;
+
+            const climaIcon = OWM_ICONS[climaAtual.icone] || 'fa-question-circle';
+            
+            let painelClass = 'alerta-neutro-bg';
+            let statusTitulo = 'Clima Estável';
+
+            if (alertas && alertas.length > 0) {
+                const niveis = alertas.map(a => a.nivel);
+                if (niveis.includes('CRÍTICO')) {
+                    painelClass = 'alerta-critico-bg';
+                    statusTitulo = '🚨 ATENÇÃO CRÍTICA';
+                } else if (niveis.includes('ALTA ATENÇÃO') || niveis.includes('ATENÇÃO')) {
+                    painelClass = 'alerta-atencao-bg';
+                    statusTitulo = '⚠️ ALERTA DE ATENÇÃO';
+                } else if (niveis.includes('AVISO')) {
+                    painelClass = 'alerta-aviso-bg';
+                    statusTitulo = '❗ AVISO DE RISCO';
+                }
+            }
+
+            let htmlAlertas = `<div class="alerta-container ${painelClass}">`;
+            htmlAlertas += `<h4>${statusTitulo}</h4>`;
+
+            if (alertas && alertas.length > 0) {
+                alertas.forEach(a => {
+                    let nivelClass = 'neutro-text';
+                    let icon = 'fa-check';
+
+                    if (a.nivel === 'CRÍTICO') { nivelClass = 'critico-text'; icon = 'fa-triangle-exclamation'; }
+                    else if (a.nivel === 'ALTA ATENÇÃO' || a.nivel === 'ATENÇÃO') { nivelClass = 'atencao-text'; icon = 'fa-exclamation'; }
+                    else if (a.nivel === 'AVISO') { nivelClass = 'aviso-text'; icon = 'fa-bell'; }
+                    
+                    htmlAlertas += `
+                        <div class="alerta-item">
+                            <i class="fa-solid ${icon} ${nivelClass}"></i>
+                            <div>
+                                <strong class="${nivelClass}">${a.titulo} (${a.nivel})</strong><br>
+                                <span>${a.mensagem}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                htmlAlertas += '<p>✅ Nenhuma situação de risco imediato detectada.</p>';
+            }
+            htmlAlertas += `</div>`;
+
+
+            let htmlCptec = '';
+            if (cptec && cptec.previsao_4_dias && cptec.previsao_4_dias.length > 1) {
+                const amanha = cptec.previsao_4_dias[1]; 
+                htmlCptec = `
+                    <div id="cptec-previsao">
+                        <h4>Previsão Oficial (${cptec.cidade_cptec})</h4>
+                        <p><strong>${amanha.data}:</strong> ${amanha.condicao_extenso}</p>
+                        <p>Min: <span class="aviso-text">${amanha.min_c}°C</span> | Max: <span class="critico-text">${amanha.max_c}°C</span></p>
+                        <small>Fonte: CPTEC/INPE - Última Atualização: ${cptec.atualizado_em}</small>
+                    </div>
+                `;
+            }
+
+            infoPainel.innerHTML = `
+                <h3><i class="fa-solid fa-location-dot"></i> ${cidade}, ${dados.local.pais}</h3>
+                
+                <div id="clima-atual-display">
+                    <div>
+                        <span id="temp-valor">${climaAtual.temperatura.toFixed(1)}°C</span>
+                        <p style="margin: 0;">${climaAtual.descricao}</p>
+                    </div>
+                    <i class="fa-solid ${climaIcon}"></i>
+                </div>
+                
+                <p>Sensação: ${climaAtual.sensacao_termica.toFixed(1)}°C | Umidade: ${climaAtual.umidade}%</p>
+                
+                ${htmlAlertas}
+                
+                ${htmlCptec}
+            `;
+        }
+
+        
+        mapa.on('click', function(e) {
+            const lat = e.latlng.lat;
+            const lon = e.latlng.lng;
+
+            if (marcadorAtual) {
+                mapa.removeLayer(marcadorAtual);
+            }
+            
+            marcadorAtual = L.marker([lat, lon]).addTo(mapa)
+                .bindPopup(`Local Selecionado<br>Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`).openPopup();
+            
+            buscarAlertas(lat, lon);
+        });
+
+        buscarAlertas(-30.0346, -51.2177);
+    </script>
+</body>
+</html>
